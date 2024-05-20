@@ -1,0 +1,39 @@
+{% include "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+<style>
+    body{
+        background: rgb(238,238,238);
+        background: linear-gradient(180deg, rgba(238,238,238,1) 0%, rgba(232,219,219,1) 100%);
+    }
+
+    .btn-register{
+        /* background: linear-gradient(180deg, rgba(238,238,238,1) 0%, rgba(232,219,219,1) 100%); */
+        transition: 0.5s;
+    }
+
+    .btn-register:hover{
+        background-color: forestgreen;
+        transform: scale(1.1);
+    }
+</style>
+
+
+{% block content %}
+    
+    <br>
+    <div class="container bg-white shadow-md p-5 form-layout">
+        
+        <h3>Create Account</h3>
+        <br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit"value="Register" class="btn btn-secondary w-100 btn-block p-2 btn-register">
+        </form>
+    </div>
+
+{% endblock content %}
