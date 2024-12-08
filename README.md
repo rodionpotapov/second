@@ -1,1 +1,1 @@
-django second project
+Знакомство с git
