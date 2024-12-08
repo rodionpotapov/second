@@ -1,6 +1,6 @@
-import json
 
 from django.contrib.sessions.middleware import SessionMiddleware
+import json
 
 from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
@@ -14,6 +14,11 @@ from .views import cart_add, cart_delete, cart_update, cart_view
 
 class CartViewTest(TestCase):
 
+    def test_cart_view(self):
+        request = self.factory
+        responce = cart_view(request)
+        self.assertEqual(responce.status_code, 200)
+        self.assertTemplateUsed(self.client.get(reverse('cart:cart-view')), 'cart/cart-view.html')
     def setUp(self):
         self.client = Client()
         self.factory = RequestFactory().get(reverse('cart:cart-view'))
@@ -21,11 +26,6 @@ class CartViewTest(TestCase):
         self.middleware.process_request(self.factory)
         self.factory.session.save()
 
-    def test_cart_view(self):
-        request = self.factory
-        responce = cart_view(request)
-        self.assertEqual(responce.status_code, 200)
-        self.assertTemplateUsed(self.client.get(reverse('cart:cart-view')), 'cart/cart-view.html')
 
 
 class CartAddViewTestCase(TestCase):
